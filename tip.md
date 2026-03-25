@@ -3,7 +3,7 @@ TIP:          ???
 Title:        Add zip-based tclkit build target to static build
 Version:      $Revision: 1.0 $
 Author:       Steve Landers <steve@digitalsmarties.com>
-Author:       Eric <email@address>
+Author:       Eric <et99@rocketship1.biz>
 State:        Draft
 Type:         Project
 Tcl-Version:  9.1
