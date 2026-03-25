@@ -312,7 +312,7 @@ if {$argc == 0} {
         if {[file exists $script]} {
             source $script
         } else {
-            puts stderr "could not find script: $script"
+            error "could not find script: $script"
             exit 1
         }
     }
