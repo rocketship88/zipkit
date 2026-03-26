@@ -307,6 +307,7 @@ if {$argc == 0} {
 #        puts "dispatch with script= |$script| ::argv= |$::argv|"
         source //zipfs:/app/ziptool.tcl
         ::ziptool::dispatch $script {*}$::argv
+		catch {pack [button .exit -text Exit -command exit] -fill both} 
 
     } else {
         if {[file exists $script]} {
