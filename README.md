@@ -32,7 +32,7 @@ the virtual filesystem format.
 
 - A static build of Tcl/Tk 9.1 or later, producing wish91s.exe
   and/or tclsh91s.exe
-- readkit.tcl placed alongside the static executable (for metaunwrap
+- readkit.tcl placed alongside the static executable (for readkit
   support of old Metakit starpacks and starkits)
 - ziptool.tcl placed alongside the static executable
 
@@ -92,10 +92,10 @@ as the .vfs folder -- so appname.vfs produces appname.exe and
 script.vfs produces script.exe, making it natural to re-wrap after
 unwrapping and editing. Overwrites existing output with a notice.
 
-### metaunwrap
+### readkit
 ```
-tclkit91w.exe metaunwrap oldstarpack.exe
-tclkit91w.exe metaunwrap oldstarkit.kit
+tclkit91w.exe readkit oldstarpack.exe
+tclkit91w.exe readkit oldstarkit.kit
 ```
 Extracts an old Metakit-based starpack or starkit using readkit.tcl.
 Produces a .vfs folder in the same directory as the input file.
@@ -144,7 +144,7 @@ platforms).
 | tclsh sdx.kit qwrap | tclkit91w.exe qwrap |
 | tclsh sdx.kit wrap | tclkit91w.exe wrap |
 | tclsh sdx.kit unwrap | tclkit91w.exe unwrap |
-| N/A | tclkit91w.exe metaunwrap |
+| N/A | tclkit91w.exe readkit |
 
 The key difference is that sdx was a separate tool requiring a tclkit
 to run it. With zipkit, the tool functionality is built into the
@@ -153,9 +153,9 @@ executable itself -- one file does everything.
 ## Files
 
 - **ziptool.tcl** -- the main tool, bootstraps the zipkit and provides
-  qwrap/wrap/unwrap/metaunwrap commands
+  qwrap/wrap/unwrap/readkit commands
 - **readkit.tcl** -- JCW's original pure-Tcl Metakit reader (unmodified),
-  bundled into the tclkit for metaunwrap support
+  bundled into the tclkit for readkit support
 
 ## License
 
