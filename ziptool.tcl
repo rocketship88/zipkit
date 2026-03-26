@@ -31,12 +31,12 @@ proc ::ziptool::dispatch {cmd args} {
         ::ziptool::wrap {*}$args
     } elseif {$cmd eq "unwrap"} {
         ::ziptool::unwrap {*}$args
-    } elseif {$cmd eq "metaunwrap"} {
-        ::ziptool::metaunwrap {*}$args
+    } elseif {$cmd eq "readkit"} {
+        ::ziptool::readkit {*}$args
     } elseif {$cmd eq "create"} {
         # TODO: implement ::ziptool::create as a dispatched command
     } else {
-        error "::ziptool::dispatch: unknown command |$cmd|, expected one of: qwrap wrap unwrap metaunwrap create"
+        error "::ziptool::dispatch: unknown command |$cmd|, expected one of: qwrap wrap unwrap readkit create"
     }
 }
 proc ::ziptool::reconstruct {procname} {
@@ -229,7 +229,7 @@ proc ::ziptool::create {sourceExe outputExe} {
         ::ziptool::reconstruct
         ::ziptool::create
         ::ziptool::qwrap
-        ::ziptool::metaunwrap
+        ::ziptool::readkit
         ::ziptool::unwrap
         ::ziptool::wrap
         ::ziptool::copydir
@@ -303,7 +303,7 @@ if {$argc == 0} {
         catch {console show}
     }
 
-    if {$script in {qwrap wrap unwrap create metaunwrap}} {
+    if {$script in {qwrap wrap unwrap create readkit}} {
 #        puts "dispatch with script= |$script| ::argv= |$::argv|"
         source //zipfs:/app/ziptool.tcl
         
@@ -319,13 +319,19 @@ if {$argc == 0} {
             }
             exit 1
         }
-
-
+        
+        
+    
     } else {
         if {[file exists $script]} {
             source $script
         } else {
-            error "could not find script: $script"
+            set msg "Could not find script (or mispelled command): $script"
+            if {[info commands tk_messageBox] ne ""} {
+                tk_messageBox -icon error -type ok -message $msg
+            } else {
+                puts stderr $msg
+            }
             exit 1
         }
     }
@@ -466,7 +472,7 @@ proc ::ziptool::qwrap {args} {
 
     puts "wrapped to: |$outputExe|"
 }
-proc ::ziptool::metaunwrap {file} {
+proc ::ziptool::readkit {file} {
     # Normalize before cd so we don't lose track of it
     set file [file normalize $file]
     
@@ -483,7 +489,7 @@ proc ::ziptool::metaunwrap {file} {
     } err]} {
         cd $savedDir
         file delete -force $tmpReadkit
-        error "metaunwrap: extraction failed: $err"
+        error "readkit: extraction failed: $err"
     }
     
     cd $savedDir
