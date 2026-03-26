@@ -306,8 +306,20 @@ if {$argc == 0} {
     if {$script in {qwrap wrap unwrap create metaunwrap}} {
 #        puts "dispatch with script= |$script| ::argv= |$::argv|"
         source //zipfs:/app/ziptool.tcl
-        ::ziptool::dispatch $script {*}$::argv
-		catch {pack [button .exit -text Exit -command exit] -fill both} 
+        
+        catch {pack [button .exit -text Exit -command exit] -fill both ; update} 
+        if {[catch {
+        	 ::ziptool::dispatch $script {*}$::argv
+        } msg opts]} {
+            # Detect if Tk is available (i.e., running under wish)
+            if {[info commands tk_messageBox] ne ""} {
+                tk_messageBox -icon error -type ok -message $msg
+            } else {
+                puts stderr $msg
+            }
+            exit 1
+        }
+
 
     } else {
         if {[file exists $script]} {
