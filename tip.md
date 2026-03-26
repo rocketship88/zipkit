@@ -57,7 +57,7 @@ as a separate file as sdx.kit was.
 Two files are added to the Tcl source tree under library/zipkit/:
 
 - **ziptool.tcl** -- a pure Tcl tool providing qwrap, wrap, unwrap
-  and metaunwrap commands, plus the bootstrap code to create the
+  and readkit commands, plus the bootstrap code to create the
   initial tclkit executable
 - **readkit.tcl** -- JCW's original pure-Tcl Metakit reader,
   unmodified, bundled for backward compatibility with old Metakit
@@ -130,10 +130,10 @@ tclkit91w wrap appname.vfs ?-runtime|-run tclkit?
 tclkit91w unwrap starpack.exe
 ```
 
-**metaunwrap** -- extracts an old Metakit starpack or starkit:
+**readkit** -- extracts an old Metakit starpack or starkit:
 ```
-tclkit91w metaunwrap oldapp.exe
-tclkit91w metaunwrap oldapp.kit
+tclkit91w readkit oldapp.exe
+tclkit91w readkit oldapp.kit
 ```
 
 When invoked with any other first argument, it is treated as a
@@ -144,7 +144,7 @@ as well as a packaging tool.
 
 The zip-based starpack format is not compatible with the old
 Metakit-based format. Old starpacks cannot be run directly by the
-new tclkit. However the metaunwrap command uses the bundled
+new tclkit. However the readkit command uses the bundled
 readkit.tcl to extract old Metakit starpacks and starkits, allowing
 migration to the new format.
 
@@ -157,7 +157,7 @@ https://github.com/rocketship88/zipkit
 The implementation is a single pure-Tcl file (ziptool.tcl) of
 approximately 500 lines. It has been tested on Windows with Tcl 9.1a1
 and demonstrates the complete workflow: bootstrap from a static build,
-qwrap, unwrap, wrap, and metaunwrap of old Metakit starpacks.
+qwrap, unwrap, wrap, and readkit of old Metakit starpacks.
 
 ## Copyright
 
