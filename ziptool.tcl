@@ -494,12 +494,16 @@ if {[string match *wish* $exename]} {
 } else {
     set outexe "${base_name}${ver}t.exe"
 }
+catch {console show;wm withdraw .; puts "---- Creating $outexe" ;update}
 cd [file dirname [info nameofexecutable]]
 ::ziptool::create [info nameofexecutable] $outexe
-catch {console show;wm withdraw .}
 update
-puts "created $outexe"
-after 2000 {exit 0}
+puts "-------------------------->  Created $outexe"
+if {[string match *wish* $exename]} {
+    after 5000 {exit 0}
+} else {
+    exit 0
+}
 
 
 
