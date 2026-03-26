@@ -485,7 +485,9 @@ proc ::ziptool::readkit {file} {
     cd [file dirname $file]
     
     if {[catch {
+        puts "starting extraction of $file" ; update
         exec [info nameofexecutable] $tmpReadkit -x $file
+        puts "Finished extraction of $file"
     } err]} {
         cd $savedDir
         file delete -force $tmpReadkit
