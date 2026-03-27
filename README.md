@@ -48,6 +48,8 @@ wish91s.exe ziptool.tcl
 This produces tclkit91w.exe (wish/GUI based) or tclkit91t.exe
 (tclsh/console based) depending on which static executable is used.
 
+Static build required -- Dynamic builds do not have tcl_library and tk_library bundled in the executable itself -- they are stored in the DLL instead. Attempting to use a dynamic build will fail with "archive directory end signature not found".
+
 The output base name defaults to **tclkit** (as in the original system)
 but can be overridden by passing a name as the first argument after
 ziptool.tcl:
