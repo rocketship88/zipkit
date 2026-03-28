@@ -300,14 +300,14 @@ if {$argc == 0} {
     set ::argc [llength $::argv]
 
     if {[info exists tk_version]} {
-        catch {console show}
+        catch {console show;console eval {wm geom . +200+20}}
     }
 
     if {$script in {qwrap wrap unwrap create readkit}} {
 #        puts "dispatch with script= |$script| ::argv= |$::argv|"
         source //zipfs:/app/ziptool.tcl
         
-        catch {pack [button .exit -text Exit -command exit] -fill both ; update} 
+        catch {pack [button .exit -text Exit -command exit] -fill both;wm geom . +10+10 ; update} 
         if {[catch {
         	 ::ziptool::dispatch $script {*}$::argv
         } msg opts]} {
