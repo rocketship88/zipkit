@@ -117,7 +117,7 @@ proc ::ziptool::wrap {args} {
 
     # Notify if overwriting existing output
     if {[file exists $outputExe]} {
-        puts "note: overwriting existing |$outputExe|"
+        puts "note: overwriting existing |$outputExe|";update
         file delete -force $outputExe
     }
 
@@ -136,6 +136,7 @@ proc ::ziptool::wrap {args} {
     foreach f [glob -nocomplain -directory //zipfs:/ziptool_tmp *] {
         set tail [file tail $f]
         if {$tail in {tcl_library tk_library}} {
+            puts "Wrapping $tail" ; update
             file copy -force $f $tmpDir
         }
     }
@@ -143,11 +144,13 @@ proc ::ziptool::wrap {args} {
 
     # Copy contents of .vfs folder into temp
     foreach f [glob -nocomplain -directory $vfsDir *] {
+        puts "Wrapping [file tail $f]" ; update
         file copy -force $f $tmpDir
     }
 
     # Create the starpack
     if {[catch {
+        puts "Creating target $outputExe";update
         zipfs mkimg $outputExe $tmpDir $tmpDir {} $runtime
     } err]} {
         file delete -force $tmpDir
