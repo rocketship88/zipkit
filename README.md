@@ -158,6 +158,20 @@ executable itself -- one file does everything.
   qwrap/wrap/unwrap/readkit commands
 - **readkit.tcl** -- JCW's original pure-Tcl Metakit reader (unmodified),
   bundled into the tclkit for readkit support
+- **starkit.tcl** -- Keith's starkit compatibility package
+
+## Related Work
+
+Keith Nash has developed a `starkit` 2.0 package (`starkit.tcl`) 
+included in this repository that provides compatibility with old 
+Metakit-based starkits and zip-based starkits. If integrated into 
+the tclkit lib folder it would allow running old .kit files 
+transparently by sourcing them directly -- the kit file's own header 
+calls either `starkit::header mk4` or `starkit::header zip` and the 
+package handles the appropriate mounting or extraction.
+
+Integration is not yet implemented but should not be particularly 
+difficult. See the email thread on tcl-core for discussion.
 
 ## License
 
