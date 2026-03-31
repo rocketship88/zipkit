@@ -190,7 +190,15 @@ proc ::ziptool::unwrap {args} {
     } err]} {
         error "unwrap: failed to mount |$file|: $err"
     }
-
+    
+    if {[catch {
+        # Create output directory before copy loop
+        file mkdir $outDir
+        puts "Unwrapping to: |$outDir|" ; update
+    } err]} {
+    	error "unwrap: failed to create output directory |$outDir|: $err"
+    }
+    
     # Copy contents skipping runtime files
     foreach f [glob -nocomplain -directory //zipfs:/unwrap_tmp *] {
         set tail [file tail $f]
